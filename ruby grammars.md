@@ -352,5 +352,62 @@ end
 - key-value pairs
   ``` ruby 
   number_hash = {"PI" => 3.14, "Gold" => 0.618, "e" => 2.718}
-  superheroes = Hash["Gho", "ksfs"]
-  ```
+  superheroes = Hash["Gho", "ksfs"] # Gho is the key, and ksfs is the corresponding value
+  superheroes.has_key?("Lisa")
+  superheroes.empty?
+  superheroes.delete("Gho") # delete key
+  
+  other_superheroes = Hash["666", "777"]
+  superheroes.update(other_superheroes) # use other_superheroes to update, notice that the value of repeated key will be replaced
+  
+  
+## Enumerables
+
+``` ruby
+class Menu
+  include Enumerable
+  
+  def each # need to provide the each method
+    yield "pizza"
+    yield "bread"
+  end
+end
+
+menu_options = Menu.new
+menu_options.find{|item| item = 'pizza'}
+menu_options.select{|item| item.size <= 5}
+menu_options.reject{|item| item.size <= 5}
+menu_options.first
+menu_options.take(2) # pick the first 2 items
+menu_options.drop(2) # pick items except the first 2
+menu_options.min
+menu_options.max
+menu_options.sort
+menu_options.reverse_each{|item| puts item}
+```
+
+## File objects
+- 
+``` ruby
+  file = File.new("authors.out", "w")
+  file.puts "Good"
+  
+  file.close
+  
+  puts File.read("authors.out")
+  
+  file = File.new("authors.out", "a") # append at the end
+  file.puts "Another writer"
+  file.close
+  
+  file = File.new("authors_info.out", "w")
+  file.pus "Good, English"
+  file.close
+  
+  File.open("authors_info.out") do |record|
+    record.each do |item|
+      name, lang, specialty, sales = item.chomp.split(',')
+      end
+    end
+  end
+```
